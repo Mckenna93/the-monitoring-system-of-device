@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ruyiweb"
+  id="myeclipse.1488071551431"
+  context-root="/ruyiweb"
+  j2ee-spec="5.0"
+  archive="ruyiweb.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
