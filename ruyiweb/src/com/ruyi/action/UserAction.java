@@ -2,6 +2,7 @@ package com.ruyi.action;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -11,6 +12,7 @@ import com.ruyi.domain.User;
 import com.ruyi.service.UserService;
 
 @Component("userAction")
+@Scope("prototype")
 public class UserAction extends ActionSupport implements ModelDriven<User>{
 
 	private User user = new User();

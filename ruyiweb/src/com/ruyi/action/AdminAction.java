@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -13,6 +14,7 @@ import com.ruyi.domain.User;
 import com.ruyi.service.UserService;
 
 @Component("adminAction")
+@Scope("prototype")
 public class AdminAction extends ActionSupport implements ModelDriven<User>{
 	
 	@Resource

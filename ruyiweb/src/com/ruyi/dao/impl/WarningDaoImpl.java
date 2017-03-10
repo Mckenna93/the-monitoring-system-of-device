@@ -41,28 +41,26 @@ public class WarningDaoImpl implements WarningDao {
 
 	public List<Warning> todayWarn(int i,String date){	
 		String sql ="SELECT * FROM  warninfo_"
-				+i+" where errorTime>?  and errorTime<?  group by id,errorNumber";
+				+i+" where Date(errorTime)=?   group by id,errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, date+" 00:00:00");
-		query.setParameter(1, date+" 23:59:59");
+		query.setParameter(0, date);
 		query.addEntity(Warning.class);
 		return query.list();
 	}
 	public List<BigInteger> todayWarnNum(int i,String date){
 		String sql = "SELECT COUNT(*)AS warningNum FROM  warninfo_"
-				+i+" where errorTime>?  and errorTime<?  group by id,errorNumber";
+				+i+" where Date(errorTime)=?  group by id,errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);//addEntity(Integer.class);
-		query.setParameter(0, date+" 00:00:00");
-		query.setParameter(1, date+" 23:59:59");
+		query.setParameter(0, date);
 		return query.list();
 	}
 	public List<Warning> historyWarn(String deviceId, String startTime,String endTime){
 		String sql ="SELECT * FROM  warninfo_"
 				+deviceId.charAt(deviceId.length()-1)
-				+" where errorTime>? and errorTime<? and id=? group by id,errorNumber";
+				+" where (Date(errorTime) between ? and ?) and id=? group by id,errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		query.setParameter(2, deviceId);
 		query.addEntity(Warning.class);
 		return query.list();
@@ -70,10 +68,10 @@ public class WarningDaoImpl implements WarningDao {
 	public List<BigInteger> historyWarnNum(String deviceId, String startTime,String endTime){
 		String sql = "SELECT COUNT(*)AS warningNum FROM  warninfo_"
 				+deviceId.charAt(deviceId.length()-1)
-				+" where errorTime>? and errorTime<? and id=?  group by id,errorNumber";
+				+" where (Date(errorTime) between ? and ?) and id=?  group by id,errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);//addEntity(Integer.class);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		query.setParameter(2, deviceId);
 		return query.list();
 	}
@@ -81,11 +79,11 @@ public class WarningDaoImpl implements WarningDao {
 			String endTime, int errorNum) {
 		String sql ="SELECT * FROM  warninfo_"
 				+deviceId.charAt(deviceId.length()-1)
-				+" where errorTime>? and errorTime<? and id=? "
+				+" where (Date(errorTime) between ? and ?) and id=? "
 				+"and errorNumber=? group by id,errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		query.setParameter(2, deviceId);
 		query.setParameter(3, errorNum);
 		query.addEntity(Warning.class);
@@ -101,11 +99,11 @@ public class WarningDaoImpl implements WarningDao {
 			String endTime, int errorNum) {
 		String sql = "SELECT COUNT(*)AS warningNum FROM  warninfo_"
 				+deviceId.charAt(deviceId.length()-1)
-				+" where errorTime>? and errorTime<? and id=? " 
+				+" where (Date(errorTime) between ? and ?) and id=? " 
 				+"and errorNumber=?  group by id,errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);//addEntity(Integer.class);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		query.setParameter(2, deviceId);
 		query.setParameter(3, errorNum);
 		List nums = query.list();
@@ -120,10 +118,10 @@ public class WarningDaoImpl implements WarningDao {
 			,String endTime, int errorNum){
 		String sql ="SELECT * FROM  warninfo_"
 				+deviceId.charAt(deviceId.length()-1)
-				+" where errorTime>? and errorTime<? and id=?  and errorNumber=? ";
+				+" where (Date(errorTime) between ? and ?) and id=?  and errorNumber=? ";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		query.setParameter(2, deviceId);
 		query.setParameter(3, errorNum);
 		query.addEntity(Warning.class);
@@ -146,19 +144,19 @@ public class WarningDaoImpl implements WarningDao {
 	}
 	public List<Warning> countByDateWarn(int i,String startTime, String endTime){
 		String sql ="SELECT * FROM  warninfo_"
-				+i+" where errorTime>?  and errorTime<?  group by errorNumber";
+				+i+" where (Date(errorTime) between ? and ?)  group by errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		query.addEntity(Warning.class);
 		return query.list();
 	}
 	public List<BigInteger> countByDateNum(int i,String startTime, String endTime){
 		String sql = "SELECT COUNT(*)AS warningNum FROM  warninfo_"
-				+i+" where errorTime>? and errorTime<? group by errorNumber";
+				+i+" where (Date(errorTime) between ? and ?) group by errorNumber";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		return query.list();
 	}
 	public List<Warning> countAllWarn(int i){

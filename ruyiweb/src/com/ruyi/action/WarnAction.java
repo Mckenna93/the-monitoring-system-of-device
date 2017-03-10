@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -19,6 +20,7 @@ import com.ruyi.service.ErrorTypeService;
 import com.ruyi.service.WarningService;
 
 @Component("warnAction")
+@Scope("prototype")
 public class WarnAction extends ActionSupport{
 	
 	@Resource

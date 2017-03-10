@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -18,6 +19,7 @@ import com.ruyi.service.ErrorTypeService;
 import com.ruyi.service.RepairService;
 
 @Component("repairAction")
+@Scope("prototype")
 public class RepairAction extends ActionSupport implements ModelDriven<Repair>{
 
 	@Resource

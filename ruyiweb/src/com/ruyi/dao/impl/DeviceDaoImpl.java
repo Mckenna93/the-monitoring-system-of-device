@@ -45,10 +45,10 @@ public class DeviceDaoImpl implements DeviceDao {
 		int index = Integer.parseInt(id.substring(id.length()-2, id.length()-1));
 		String sql = "SELECT COUNT(hornCount) AS hornCount,COUNT(upBtnCount) AS upBtnCount,COUNT(upBtnContactorCount) AS upBtnContactorCount,"+
 				"COUNT(downBtnCount) AS downBtnCount,COUNT(masterContactorCount) AS masterContactorCount,COUNT(arresterCount) AS arresterCount"+
-				"  FROM deviceinfo_"+index+" WHERE TIME>? AND TIME<?";
+				"  FROM deviceinfo_"+index+" WHERE date(time) between ? AND ?";
 		SQLQuery query = sessionFac.getCurrentSession().createSQLQuery(sql);
-		query.setParameter(0, startTime+" 00:00:00");
-		query.setParameter(1, endTime+" 23:59:59");
+		query.setParameter(0, startTime);
+		query.setParameter(1, endTime);
 		return  query.list();
 	}
 

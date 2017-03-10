@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -14,6 +15,7 @@ import com.ruyi.domain.User;
 import com.ruyi.service.DeviceService;
 
 @Component("deviceAction")
+@Scope("prototype")
 public class DeviceAction extends ActionSupport implements ModelDriven<Device>{
 	
 	@Resource
